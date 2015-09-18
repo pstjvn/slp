@@ -21,7 +21,9 @@ portion of the url.
 Options:
 
 ```--config``` - tell the script where to find your config file, by default the example one is used.
+
 ```--host``` - tell the web server on which IP/host to listen on.
+
 ```--port``` - tell the web server on which port to listen on.
 
 By default the host and port are read from the environment in order to allow the
