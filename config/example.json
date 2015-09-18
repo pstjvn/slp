@@ -1,0 +1,22 @@
+{
+  "test123": {
+    "contains": "dispatcher",
+    "prepend": "http://my.remote.testserver.nl"
+  },
+
+  "somethingDescriptive": {
+    "contains": "custom.cgi",
+    "prepend": "http://1.1.1.1:204/"
+  },
+
+  "mycustomkey": {
+    "contains": "crates",
+    "replace": ["crates/", ""],
+    "prepend": "http://mydomain.com"
+  },
+
+  "appendTest": {
+    "contains": "testapi",
+    "append": "&key=SKJASKUsiashjalsalsk"
+  }
+}
