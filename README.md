@@ -26,6 +26,8 @@ Options:
 
 ```--port``` - tell the web server on which port to listen on.
 
+```--root``` - tell the server where is the root of the FS to server.
+
 By default the host and port are read from the environment in order to allow the
 implementation to work in cloud based IDE/development environment where you do
 not have control over those.
