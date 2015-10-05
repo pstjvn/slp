@@ -63,6 +63,10 @@ var host = (args['host']) ? args['host'] : WEB_HOST;
 
 var config = fs.readFileSync(configFile, 'utf8');
 var json = JSON.parse(config);
+var file = new nodestatic.Server(webroot, {
+  cache: 600,
+  headers: {'X-Powered-By': 'node-static'}
+});
 
 var handler = function(req, res) {
   var url = req.url;
