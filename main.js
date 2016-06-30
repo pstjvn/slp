@@ -31,24 +31,25 @@ var WEB_ROOT = '../';
  *
  * @type {number|string}
  */
-var WEB_PORT = process.env.PORT;
+var WEB_PORT =
+    process.env.PORT || 3000
 
 
-/**
- * The IP/host to listen on.
- *
- * By default we use the environment variable IP to be compatible with cloud
- * based test environments.
- *
- * @type {string}
- */
-var WEB_HOST = process.env.IP;
+    /**
+     * The IP/host to listen on.
+     *
+     * By default we use the environment variable IP to be compatible with cloud
+     * based test environments.
+     *
+     * @type {string}
+     */
+    var WEB_HOST = process.env.IP || '0.0.0.0'
 
 
-/**
- * @type {!Object<string, *>}
- */
-var args = minimist(process.argv.slice(2));
+                   /**
+                    * @type {!Object<string, *>}
+                    */
+                   var args = minimist(process.argv.slice(2));
 
 
 /**
@@ -63,13 +64,12 @@ var host = (args['host']) ? args['host'] : WEB_HOST;
 
 var config = fs.readFileSync(configFile, 'utf8');
 var json = JSON.parse(config);
-var file = new nodestatic.Server(webroot, {
-  cache: 600,
-  headers: {'X-Powered-By': 'node-static'}
-});
+var file = new nodestatic.Server(
+    webroot, {cache: 600, headers: {'X-Powered-By': 'node-static'}});
 
 var handler = function(req, res) {
   var url = req.url;
+  console.log(url);
   var substituted = false;
   for (var key in json) {
     match = json[key]['contains'];
@@ -93,12 +93,8 @@ var handler = function(req, res) {
       file.serve(req, res, function(err, result) {
         if (err) {
           console.error('Error serving %s - %s', req.url, err.message);
-          if (err.status === 404 || err.status === 500) {
-            res.end();
-          } else {
-            res.writeHead(err.status, err.headers);
-            res.end();
-          }
+          res.writeHead(err.status, err.headers);
+          res.end();
         }
       });
     });
